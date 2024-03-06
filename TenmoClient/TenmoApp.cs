@@ -73,7 +73,7 @@ namespace TenmoClient
 
             if (menuSelection == 1)
             {
-                // View your current balance
+                // View your current balance. need to write code here. copy what was done for option 6 with private methods.
             }
 
             if (menuSelection == 2)
