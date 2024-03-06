@@ -10,21 +10,20 @@ namespace TenmoServer.Controllers
     public class AccountController : ControllerBase
     {
         private IBalanceDao balanceDao;
-        public AccountController(IBalanceDao balanceDao)
+        private IUserDao userDao;
+
+        public AccountController(IBalanceDao balanceDao, IUserDao userDao)
         {
             this.balanceDao = balanceDao;
+            this.userDao = userDao;
         }
-        ////GET /
-        //[HttpGet("/")]
-        //public ActionResult<string> Ready()
-        //{
-        //    return Ok("Server is ready!");
-        //}
 
-        [HttpGet("{accountId}")]
-        public ActionResult <decimal>  GetBalance(int accountId)
+
+        [HttpGet]
+        public ActionResult<decimal> GetBalance()
         {
-            return balanceDao.GetBalanceByAccountId(accountId);
+            User currentUser = userDao.GetUserByUsername(User.Identity.Name);
+            return balanceDao.GetBalanceByAccountId(currentUser.UserId);
         }
 
     }

@@ -10,6 +10,6 @@ namespace TenmoClient.Models
     {
         private int AccountId { get; set; }
         public int UserId { get; set; }
-        public decimal Balance { get; set; } = 1000m;
+        public decimal Balance { get; set; }
     }
 }

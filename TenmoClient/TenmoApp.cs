@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TenmoClient.Models;
 using TenmoClient.Services;
 
+
 namespace TenmoClient
 {
     public class TenmoApp
@@ -73,7 +74,7 @@ namespace TenmoClient
 
             if (menuSelection == 1)
             {
-                // View your current balance. need to write code here. copy what was done for option 6 with private methods.
+                
             }
 
             if (menuSelection == 2)
