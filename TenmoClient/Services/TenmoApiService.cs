@@ -11,7 +11,12 @@ namespace TenmoClient.Services
         public TenmoApiService(string apiUrl) : base(apiUrl) { }
 
         // Add methods to call api here...
-
-
+        public decimal GetBalance(int accountId)
+        {
+            RestRequest request = new RestRequest("account/" + accountId);
+            IRestResponse<Account> response = client.Get<Account>(request);
+            CheckForError(response);
+            return response.Data.Balance;
+        }
     }
 }
