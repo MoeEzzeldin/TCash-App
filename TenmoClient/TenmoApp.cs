@@ -73,6 +73,7 @@ namespace TenmoClient
 
             if (menuSelection == 1)
             {
+                GetBalance();
                 // View your current balance. need to write code here. copy what was done for option 6 with private methods.
             }
 
@@ -155,6 +156,21 @@ namespace TenmoClient
             catch (Exception)
             {
                 console.PrintError("Registration was unsuccessful.");
+            }
+            console.Pause();
+        }
+
+        private void GetBalance()
+        {
+            try
+            {
+                decimal balance = tenmoApiService.GetBalance();
+                console.PrintBalance(balance);
+
+            }
+            catch (Exception ex)
+            {
+                console.PrintError(ex.Message);
             }
             console.Pause();
         }

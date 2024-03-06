@@ -11,22 +11,27 @@ namespace TenmoServer.Controllers
     public class AccountController : ControllerBase
     {
         private IBalanceDao balanceDao;
+        private IUserDao userDao;
 
-        public AccountController(IBalanceDao balanceDao)
+        public AccountController(IBalanceDao balanceDao, IUserDao userDao)
         {
             this.balanceDao = balanceDao;
+            this.userDao = userDao;
         }
 
-        [HttpGet("{userId}")]
-        public ActionResult<decimal> GetBalance(int accountId)
+        [HttpGet]
+        public ActionResult<decimal> GetBalance()
         {
-            User currentUser = UserD
-            return balanceDao.GetBalanceByAccountId(accountId); //so here, we'll need to get the accountId from the userId.
+            User currentUser = userDao.GetUserByUsername(User.Identity.Name);
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return balanceDao.GetBalanceByUserId(currentUser.UserId);
+            }
+            //return balanceDao.GetBalanceByAccountId(accountId); //so here, we'll need to get the accountId from the userId.
         }
-        //User currentUser = userDao.GetUserByUsername(User.Identity.Name);
-        //pet.Owner = currentUser.UserId;
-        //    pet.OwnerName = currentUser.Username;
-        //    Pet addedPet = dao.AddAPet(pet);
-        //    return Created("/pet", addedPet);
     }
 }
