@@ -20,22 +20,7 @@ namespace TenmoServer.Controllers
             this.balanceDao = balanceDao;
             this.userDao = userDao;
         }
-<<<<<<< HEAD
 
-        [HttpGet]
-        public ActionResult<List<User>> GetDifferentUsers()
-        {
-            //string username = User.Identity.Name;
-            IList<User> list = userDao.GetDifferentUsers();
-            if (list.Count > 0)
-            {
-                return Ok(list);
-            }
-            else
-            {
-                return NotFound();
-            }
-=======
         [HttpGet("/tenmo_user")]
         public ActionResult<List<User>> GetDifferentUsers()
         {
@@ -50,7 +35,7 @@ namespace TenmoServer.Controllers
             //    return NotFound();
             //}
             return Ok(list);
->>>>>>> bdab6f8fceaac1ed7865c632b2269ea7d89579f0
+
         }
     }
 }

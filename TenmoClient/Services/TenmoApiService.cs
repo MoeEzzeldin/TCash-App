@@ -10,10 +10,7 @@ namespace TenmoClient.Services
 
         public TenmoApiService(string apiUrl) : base(apiUrl) { }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> bdab6f8fceaac1ed7865c632b2269ea7d89579f0
         public decimal GetBalance()
         {
             RestRequest request = new RestRequest("/account");
@@ -21,13 +18,8 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
-<<<<<<< HEAD
 
-
-        public List<User> GetDifferentUsers()
-=======
         public List<User> GetDifferentUsers() //just added the "I" in front of list.
->>>>>>> bdab6f8fceaac1ed7865c632b2269ea7d89579f0
         {
             RestRequest request = new RestRequest("/tenmo_user");
             IRestResponse<List<User>> response = client.Get<List<User>>(request);
