@@ -33,15 +33,15 @@ namespace TenmoClient.Methods
             }
             return result;
         }
-        public decimal TransferFundsFromAccount(decimal fromBalance, decimal amountToTransfer)
-        {
-            fromBalance = fromBalance - amountToTransfer;
-            return fromBalance;
-        }
-        public decimal TransferFundsToAccount(decimal amountToTransfer, decimal toBalance)
-        {
-            toBalance = toBalance + amountToTransfer;
-            return toBalance;
-        }
+        //public decimal TransferFundsFromAccount(decimal fromBalance, decimal amountToTransfer)
+        //{
+        //    fromBalance = fromBalance - amountToTransfer;
+        //    return fromBalance;
+        //}
+        //public decimal TransferFundsToAccount(decimal amountToTransfer, decimal toBalance)
+        //{
+        //    toBalance = toBalance + amountToTransfer;
+        //    return toBalance;
+        //}
     }
 }

@@ -20,8 +20,9 @@ namespace TenmoServer.Controllers
             this.balanceDao = balanceDao;
             this.userDao = userDao;
         }
-        [HttpPut()]
-        public ActionResult UpdateFromBalance(Transfer transfer)
+
+        [HttpPost]
+        public ActionResult UpdateBalances(TransferDTO transfer) 
         {
             User currentUser = userDao.GetUserByUsername(User.Identity.Name);
             if (currentUser == null)
@@ -34,7 +35,11 @@ namespace TenmoServer.Controllers
                 balanceDao.UpdateToBalance(transfer.Amount, transfer.AccountTo);
                 return Ok();
             }
-
+        }
+        [HttpGet]
+        public ActionResult<string> Testing()
+        {
+            return "We're here";
         }
     }
 }
