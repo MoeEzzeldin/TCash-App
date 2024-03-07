@@ -10,4 +10,18 @@
         public string Token { get; set; }
         public string Message { get; set; }
     }
+    public class User
+    {
+        public int UserId { get; set; }
+        public string Username { get; set; }
+        public string PasswordHash { get; set; }
+        public string Salt { get; set; }
+        public string Email { get; set; }
+
+        public override string ToString()
+        {
+            return $"{UserId} - {Username}";
+        }
+    }
+
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using TenmoServer.Exceptions;
@@ -8,7 +9,7 @@ using TenmoServer.Security.Models;
 
 namespace TenmoServer.DAO
 {
-    public class UserSqlDao : IUserDao
+    public class UserSqlDao : ControllerBase, IUserDao
     {
         private readonly string connectionString;
         const decimal StartingBalance = 1000M;
@@ -148,6 +149,36 @@ namespace TenmoServer.DAO
             }
 
             return newUser;
+        }
+        public IList<User> GetDifferentUsers()
+        {
+            IList<User> users = new List<User>();
+
+            string sql = "SELECT user_id, username FROM tenmo_user WHERE username != @username";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    string currentUsername = User.Identity.Name;
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@username", currentUsername);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        User user = new User();
+                        user.UserId = Convert.ToInt32(reader["user_id"]);
+                        user.Username = Convert.ToString(reader["username"]);
+                        users.Add(user);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException("SQL exception occurred", ex);
+            }
+            return users;
         }
 
 

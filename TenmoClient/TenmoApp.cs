@@ -74,12 +74,9 @@ namespace TenmoClient
 
             if (menuSelection == 1)
             {
-<<<<<<< HEAD
-                
-=======
+
                 GetBalance();
-                // View your current balance. need to write code here. copy what was done for option 6 with private methods.
->>>>>>> e436a5d41323f3d4969e90f69844cfa5c8b10b59
+
             }
 
             if (menuSelection == 2)
@@ -171,7 +168,6 @@ namespace TenmoClient
             {
                 decimal balance = tenmoApiService.GetBalance();
                 console.PrintBalance(balance);
-
             }
             catch (Exception ex)
             {

@@ -1,8 +1,8 @@
 ﻿using RestSharp;
 using System.Collections.Generic;
 using TenmoClient.Models;
-
 namespace TenmoClient.Services
+//namespace TenmoServer.Services
 {
     public class TenmoApiService : AuthenticatedApiService
     {
@@ -10,22 +10,7 @@ namespace TenmoClient.Services
 
         public TenmoApiService(string apiUrl) : base(apiUrl) { }
 
-        // Add methods to call api here...
 
-        //public decimal GetBalance(int accountId)
-        //{
-        //    RestRequest request = new RestRequest("account/" + accountId);
-        //    IRestResponse<Account> response = client.Get<Account>(request);
-        //    CheckForError(response);
-        //    return response.Data.Balance;
-        //}
-        //public decimal GetBalance(int userId)
-        //{
-        //    RestRequest request = new RestRequest("account/" + userId);
-        //    IRestResponse<Account> response = client.Get<Account>(request);
-        //    CheckForError(response);
-        //    return response.Data.Balance;
-        //}
         public decimal GetBalance()
         {
             RestRequest request = new RestRequest("/account");
@@ -34,6 +19,14 @@ namespace TenmoClient.Services
             return response.Data;
         }
 
-        public List<User>
+
+        public List<User> GetDifferentUsers()
+        {
+            RestRequest request = new RestRequest("/tenmo_user");
+            IRestResponse<List<User>> response = client.Get<List<User>>(request);
+            CheckForError(response);
+            return response.Data;
+        }
+
     }
 }

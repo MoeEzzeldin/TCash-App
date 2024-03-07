@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TenmoClint.Exceptions;
+using TenmoServer.DAO;
+using TenmoServer.Exceptions;
 
-namespace TenmoClient.Models
+namespace TenmoServer.Models
 {
     public class Transfer
     {
@@ -13,7 +14,7 @@ namespace TenmoClient.Models
         public int TransferTypeId { get; set; }
         public string TransferTypeDescription { get; set; }
         public int TransferStatusId { get; set; }
-        public int TransferStatusDescription { get; set; }
+        public string TransferStatusDescription { get; set; }
         public int AccountFrom { get; set; }
         public int AccountTo
         {
@@ -23,13 +24,14 @@ namespace TenmoClient.Models
             }
             set
             {
-                if(AccountTo != AccountFrom)
+
+                if (AccountTo != AccountFrom)
                 {
-                    
+                    value = AccountTo;
                 }
                 else
                 {
-                    throw new TransferAccountToException("You Cant Send Yourself TEbucks, Please Select The Currect Username");
+                    throw new TransferAccountToException("You cannot send yourself TE Bucks");
                 }
             }
         }
@@ -41,11 +43,17 @@ namespace TenmoClient.Models
             }
             set
             {
-                if(Amount == 0)
+
+                if (Amount != 0)
                 {
-                    throw new NonZeroException("Amount Must Be Greater Than (0)");
+                    value = Amount;
+                }
+                else
+                {
+                    throw new NonZeroException("Amount must be greater than zero.");
                 }
             }
         }
+
     }
 }

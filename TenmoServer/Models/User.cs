@@ -19,10 +19,12 @@
         //public string Role { get; set; }
         public string Token { get; set; }
 
+
         public override string ToString()
         {
             return $"{UserId}-{Username}";
         }
+
     }
 
     /// <summary>
