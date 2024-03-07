@@ -89,6 +89,7 @@ namespace TenmoClient
 
             if (menuSelection == 4)
             {
+                SendTEBucks();
                 // Send TE bucks
             }
 
@@ -172,6 +173,17 @@ namespace TenmoClient
                 console.PrintError(ex.Message);
             }
             console.Pause();
+        }
+        private void SendTEBucks()
+        {
+            IList<User> DifferentUsers = tenmoApiService.GetDifferentUsers();
+            string header = $"{"User Id".PadLeft(10)}{"Username".PadLeft(10)}\n";
+            Console.WriteLine(header);
+            foreach(User user in DifferentUsers)
+            {
+                Console.WriteLine(user);
+            }
+            
         }
     }
 }

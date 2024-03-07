@@ -9,7 +9,7 @@ using TenmoServer.Security.Models;
 
 namespace TenmoServer.DAO
 {
-    public class UserSqlDao : ControllerBase, IUserDao
+    public class UserSqlDao : IUserDao
     {
         private readonly string connectionString;
         const decimal StartingBalance = 1000M;
@@ -150,9 +150,9 @@ namespace TenmoServer.DAO
 
             return newUser;
         }
-        public IList<User> GetDifferentUsers()
+        public IList<User> GetDifferentUsers(string currentUsername) 
         {
-            IList<User> users = new List<User>();
+            IList<User> users = new List<User>(); 
 
             string sql = "SELECT user_id, username FROM tenmo_user WHERE username != @username";
 
@@ -161,7 +161,6 @@ namespace TenmoServer.DAO
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string currentUsername = User.Identity.Name;
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@username", currentUsername);
                     SqlDataReader reader = cmd.ExecuteReader();

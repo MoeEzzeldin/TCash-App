@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TenmoServer.DAO;
 using TenmoServer.Exceptions;
@@ -19,10 +20,20 @@ namespace TenmoServer.Controllers
             this.balanceDao = balanceDao;
             this.userDao = userDao;
         }
-        [HttpGet]
+        [HttpGet("/tenmo_user")]
         public ActionResult<List<User>> GetDifferentUsers()
         {
-            string username = 
+            string username = User.Identity.Name;
+            IList<User> list = userDao.GetDifferentUsers(username);
+            //if (list.Count > 0)
+            //{
+            //    return Ok(list);
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+            return Ok(list);
         }
     }
 }
