@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TenmoClient.Methods;
 using TenmoClient.Models;
 using TenmoClient.Services;
 
@@ -9,6 +10,7 @@ namespace TenmoClient
     {
         private readonly TenmoConsoleService console = new TenmoConsoleService();
         private readonly TenmoApiService tenmoApiService;
+        private readonly TransferMethods transferMethods = new TransferMethods();
 
         public TenmoApp(string apiUrl)
         {
@@ -176,14 +178,30 @@ namespace TenmoClient
         }
         private void SendTEBucks()
         {
-            IList<User> DifferentUsers = tenmoApiService.GetDifferentUsers();
+            List<User> DifferentUsers = tenmoApiService.GetDifferentUsers();
             string header = $"{"User Id".PadLeft(10)}{"Username".PadLeft(10)}\n";
             Console.WriteLine(header);
             foreach(User user in DifferentUsers)
             {
                 Console.WriteLine(user);
             }
-            
+            console.Pause();
+            Console.WriteLine();
+            Console.WriteLine("Select the User ID of the individual you would like to send money to.");
+            int userIdSelection = int.Parse(Console.ReadLine());
+            bool test = transferMethods.CheckForValidUserId(userIdSelection, DifferentUsers);
+            Console.WriteLine();
+            if (test)
+            {
+                Console.WriteLine("Enter the amount of TEBucks you would like to send.");
+                int amountToTransfer = int.Parse(Console.ReadLine());
+            }
+            else
+            {
+                Console.WriteLine("Invalid User ID");
+                userIdSelection = int.Parse(Console.ReadLine());
+            }
+            console.Pause();
         }
     }
 }

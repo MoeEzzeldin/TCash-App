@@ -20,7 +20,9 @@
 
         public override string ToString()
         {
-            return $"{UserId} - {Username}";
+            string userIdString = UserId.ToString();
+            //return $"{UserId} - {Username}"
+            return $"{userIdString.PadLeft(10)}{Username.PadLeft(10)}";
         }
     }
 
