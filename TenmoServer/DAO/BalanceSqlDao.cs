@@ -17,34 +17,6 @@ namespace TenmoServer.DAO
         {
             connectionString = dbConnectionString;
         }
-        //public decimal GetBalanceByAccountId(int accountId)
-        //{
-        //    Account account = new Account();
-        //    string sql = "SELECT balance FROM account WHERE account_id = @account_id;";
-
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            conn.Open();
-
-        //            SqlCommand cmd = new SqlCommand(sql, conn);
-        //            cmd.Parameters.AddWithValue("@account_id", accountId);
-        //            SqlDataReader reader = cmd.ExecuteReader();
-
-        //            if (reader.Read())
-        //            {
-        //                account.Balance = MapRowToUser(reader);
-        //            }
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw new DaoException("SQL exception occurred", ex);
-        //    }
-
-        //    return account.Balance;
-        //}
         public decimal GetBalanceByUserId(int userId)
         {
             Account account = new Account();

@@ -1,8 +1,8 @@
 ﻿using RestSharp;
 using System.Collections.Generic;
 using TenmoClient.Models;
-
 namespace TenmoClient.Services
+//namespace TenmoServer.Services
 {
     public class TenmoApiService : AuthenticatedApiService
     {
@@ -31,6 +31,10 @@ namespace TenmoClient.Services
             IRestResponse<decimal> response = client.Get<decimal>(request);
             CheckForError(response);
             return response.Data;
+        }
+        public List<User> GetUsernamesAndIds()
+        {
+
         }
     }
 }

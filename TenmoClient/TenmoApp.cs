@@ -166,7 +166,6 @@ namespace TenmoClient
             {
                 decimal balance = tenmoApiService.GetBalance();
                 console.PrintBalance(balance);
-
             }
             catch (Exception ex)
             {
