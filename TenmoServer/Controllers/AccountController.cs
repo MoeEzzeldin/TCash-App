@@ -23,8 +23,16 @@ namespace TenmoServer.Controllers
         public ActionResult<decimal> GetBalance()
         {
             User currentUser = userDao.GetUserByUsername(User.Identity.Name);
-            return balanceDao.GetBalanceByAccountId(currentUser.UserId);
-        }
 
+            if (currentUser == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return balanceDao.GetBalanceByUserId(currentUser.UserId);
+            }
+            //return balanceDao.GetBalanceByAccountId(accountId); //so here, we'll need to get the accountId from the userId.
+        }
     }
 }
