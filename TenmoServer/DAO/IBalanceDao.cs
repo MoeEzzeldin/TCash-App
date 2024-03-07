@@ -7,5 +7,10 @@ namespace TenmoServer.DAO
     {
         //decimal GetBalanceByAccountId(int accountId);
         decimal GetBalanceByUserId(int userId);
+
+        public decimal UpdateFromBalance(decimal amountToDesposit,int fromUserId);
+
+        public decimal UpdateToBalance(decimal amountToDesposit, int toUserId);
     }
+
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Security.Principal;
 using TenmoServer.Exceptions;
 using TenmoServer.Models;
 using TenmoServer.Security;
@@ -45,7 +46,62 @@ namespace TenmoServer.DAO
 
             return account.Balance;
         }
+        public decimal UpdateFromBalance(decimal amountToDesposit, int fromUserId)
+        {
+            Account account = new Account();
+            string sql = "UPDATE account SET balance = balance-@balance WHERE user_id = @user_id";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
 
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@balance", amountToDesposit);
+                    cmd.Parameters.AddWithValue("@user_id", fromUserId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        account.Balance = MapRowToUser(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException("SQL exception occurred", ex);
+            }
+
+            return account.Balance;
+        }
+        public decimal UpdateToBalance(decimal amountToDesposit, int toUserId)
+        {
+            Account account = new Account();
+            string sql = "UPDATE account SET balance = balance + @balance WHERE user_id = @user_id";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@balance", amountToDesposit);
+                    cmd.Parameters.AddWithValue("@user_id", toUserId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        account.Balance = MapRowToUser(reader);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException("SQL exception occurred", ex);
+            }
+
+            return account.Balance;
+        }
         private decimal MapRowToUser(SqlDataReader reader)
         {
             Account account = new Account();

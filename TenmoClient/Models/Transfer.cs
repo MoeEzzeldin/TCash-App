@@ -13,7 +13,7 @@ namespace TenmoClient.Models
         public int TransferTypeId { get; set; }
         public string TransferTypeDescription { get; set; }
         public int TransferStatusId { get; set; }
-        public string TransferStatusDescription { get; set; }
+        public string TransferStatusDescription { get; set; } = "Approved";
         public int AccountFrom { get; set; }
         public int AccountTo
         {
@@ -41,7 +41,7 @@ namespace TenmoClient.Models
             }
             set
             {
-                if (Amount != 0)
+                if (Amount > 0)
                 {
                     value = Amount;
                 }
