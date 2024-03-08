@@ -26,6 +26,17 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
+<<<<<<< HEAD
 
+=======
+        //*********ADDED*********************************
+        public Transfer UpdateBalances(Transfer transfer)
+        {
+            RestRequest request = new RestRequest("/transfer");
+            request.AddJsonBody(transfer);
+            IRestResponse<Transfer> response = client.Put<Transfer>(request);
+            return response.Data;
+        }
+>>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
     }
 }

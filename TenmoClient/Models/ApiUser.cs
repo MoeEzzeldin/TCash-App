@@ -25,5 +25,4 @@
             return $"{userIdString.PadLeft(10)}{Username.PadLeft(10)}";
         }
     }
-
 }

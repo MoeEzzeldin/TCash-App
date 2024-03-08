@@ -19,9 +19,29 @@ namespace TenmoClient.Methods
                 {
                     result = true;
                     break;
-                }  
+                }
             }
             return result;
         }
+        public bool DoIHaveEnoughBalanceToTransfer(decimal fromBalance, decimal amountToTransfer)
+        {
+            bool result = false;
+            if (fromBalance - amountToTransfer >= 0)
+            {
+               
+                result = true;
+            }
+            return result;
+        }
+        //public decimal TransferFundsFromAccount(decimal fromBalance, decimal amountToTransfer)
+        //{
+        //    fromBalance = fromBalance - amountToTransfer;
+        //    return fromBalance;
+        //}
+        //public decimal TransferFundsToAccount(decimal amountToTransfer, decimal toBalance)
+        //{
+        //    toBalance = toBalance + amountToTransfer;
+        //    return toBalance;
+        //}
     }
 }

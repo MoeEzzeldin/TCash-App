@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +36,7 @@ namespace TenmoServer.Models
                 }
             }
         }
+<<<<<<< HEAD
         public decimal Amount
         {
             get
@@ -54,6 +56,10 @@ namespace TenmoServer.Models
                 }
             }
         }
+=======
+>>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
 
+        [Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
+        public decimal Amount { get; set; }
     }
 }
