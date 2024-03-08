@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,24 +16,8 @@ namespace TenmoClient.Models
         public int TransferStatusId { get; set; }
         public string TransferStatusDescription { get; set; } = "Approved";
         public int AccountFrom { get; set; }
-        public int AccountTo
-        {
-            get
-            {
-                return AccountTo;
-            }
-            set
-            {
-                if (AccountTo != AccountFrom)
-                {
-                    value = AccountTo;
-                }
-                else
-                {
-                    throw new TransferAccountToException("You cannot send yourself TE Bucks");
-                }
-            } 
-        }
+        public int AccountTo { get; set; }
+        //[Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
         public decimal Amount
         {
             get
@@ -41,9 +26,9 @@ namespace TenmoClient.Models
             }
             set
             {
-                if (Amount > 0)
+                if (value > 0)
                 {
-                    value = Amount;
+                    Amount = value;
                 }
                 else
                 {

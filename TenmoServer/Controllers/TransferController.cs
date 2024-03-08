@@ -14,11 +14,13 @@ namespace TenmoServer.Controllers
     {
         private readonly IBalanceDao balanceDao;
         private readonly IUserDao userDao;
+        private readonly ITransferDao transferDao;
 
-        public TransferController(IBalanceDao balanceDao, IUserDao userDao)
+        public TransferController(IBalanceDao balanceDao, IUserDao userDao, ITransferDao transferDao)
         {
             this.balanceDao = balanceDao;
             this.userDao = userDao;
+            this.transferDao = transferDao;
         }
 
         [HttpPost]
@@ -31,15 +33,12 @@ namespace TenmoServer.Controllers
             }
             else
             {
+                //transferDao.CreateNewTransfer(transfer); with Transfer object argument in controller.
+                transferDao.CreateNewTransfer(transfer.AccountTo,currentUser.UserId, transfer.Amount);
                 balanceDao.UpdateFromBalance(transfer.Amount, currentUser.UserId);
                 balanceDao.UpdateToBalance(transfer.Amount, transfer.AccountTo);
                 return Ok();
             }
-        }
-        [HttpGet]
-        public ActionResult<string> Testing()
-        {
-            return "We're here";
         }
     }
 }

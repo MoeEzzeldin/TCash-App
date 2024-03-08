@@ -11,7 +11,6 @@ namespace TenmoServer.Models
     {
         public int AccountTo { get; set; }
         [Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
-        public decimal Amount { get; set; }
-        
+        public decimal Amount { get; set; }        
     }
 }

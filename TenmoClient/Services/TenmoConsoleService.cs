@@ -9,6 +9,7 @@ namespace TenmoClient.Services
     public class TenmoConsoleService : ConsoleService
     {
         TransferMethods transferMethods = new TransferMethods();
+        Transfer transfer = new Transfer();
         /************************************************************
             Print methods
         ************************************************************/
@@ -81,7 +82,7 @@ namespace TenmoClient.Services
                     if (test)
                     {
                         Console.WriteLine("Enter the amount of TEBucks you would like to send.");
-                        int amountToTransfer = int.Parse(Console.ReadLine());
+                        transfer.Amount = int.Parse(Console.ReadLine());
                     }
                     else
                     {
