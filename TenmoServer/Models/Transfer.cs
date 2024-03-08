@@ -11,12 +11,13 @@ namespace TenmoServer.Models
 {
     public class Transfer
     {
-        private int TransferId { get; set; }
+        public int TransferId { get; set; }
         public int TransferTypeId { get; set; }
         public string TransferTypeDescription { get; set; }
         public int TransferStatusId { get; set; }
         public string TransferStatusDescription { get; set; }
         public int AccountFrom { get; set; }
+<<<<<<< HEAD
         public int AccountTo
         {
             get
@@ -58,6 +59,10 @@ namespace TenmoServer.Models
         }
 =======
 >>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
+=======
+        public int AccountTo { get; set; }
+
+>>>>>>> 406b8cdde3f40ba55ac9798a21a877685ae4c810
 
         [Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
         public decimal Amount { get; set; }
