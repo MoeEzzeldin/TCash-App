@@ -1,5 +1,7 @@
-﻿using RestSharp;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using TenmoClient.Models;
 namespace TenmoClient.Services
 //namespace TenmoServer.Services
@@ -10,7 +12,7 @@ namespace TenmoClient.Services
 
         public TenmoApiService(string apiUrl) : base(apiUrl) { }
 
-        public decimal GetBalance()
+        public decimal GetBalance() //my balance
         {
             RestRequest request = new RestRequest("/account");
             IRestResponse<decimal> response = client.Get<decimal>(request);
@@ -24,12 +26,21 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
-        //****************ADDED*********************************
-        public Transfer UpdateBalances(Transfer transfer)
+       
+        public User CheckForValidUserById(int id)
+        {
+            RestRequest request = new RestRequest("/tenmo_user/" + id); //this end point may not work!
+            IRestResponse<User> response = client.Get<User>(request);
+            CheckForError(response);
+            return response.Data;
+        }
+
+        public Transfer Transfer(Transfer transfer)
         {
             RestRequest request = new RestRequest("/transfer");
             request.AddJsonBody(transfer);
-            IRestResponse<Transfer> response = client.Put<Transfer>(request);
+            IRestResponse<Transfer> response = client.Post<Transfer>(request);
+            CheckForError(response);
             return response.Data;
         }
     }

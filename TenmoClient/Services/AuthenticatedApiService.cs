@@ -76,7 +76,7 @@ namespace TenmoClient.Services
         /// if the call was not successful. If no error, just returns to caller.
         /// </summary>
         /// <param name="response">Response returned from a RestSharp method call.</param>
-        protected void CheckForError(IRestResponse response)
+        public void CheckForError(IRestResponse response) //switched from protected to public
         {
             string message;
             if (response.ResponseStatus != ResponseStatus.Completed)

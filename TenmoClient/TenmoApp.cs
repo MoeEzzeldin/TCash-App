@@ -1,4 +1,6 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using TenmoClient.Methods;
@@ -12,6 +14,7 @@ namespace TenmoClient
         private readonly TenmoConsoleService console = new TenmoConsoleService();
         private readonly TenmoApiService tenmoApiService;
         private readonly TransferMethods transferMethods = new TransferMethods();
+        //private readonly AuthenticatedApiService authenticatedApiService = new AuthenticatedApiService();
 
         public TenmoApp(string apiUrl)
         {
@@ -92,7 +95,18 @@ namespace TenmoClient
 
             if (menuSelection == 4)
             {
-                console.SendTEBucks(tenmoApiService.GetDifferentUsers());
+                int userInput = console.GetsUserIdToSendMoneyTo(tenmoApiService.GetDifferentUsers()); //Step 1: Testing for valid userId
+                TestingForValidUserId(userInput); //Step 1: Testing for valid userId.
+                decimal userToAmount = console.PromptingUserForAmountToSend(); //Step 2: No logic for <=0 needed because of setter condition. 
+                {
+                    Transfer transfer = new Transfer();
+                    transfer.AccountTo = userInput;
+                    transfer.Amount = userToAmount;
+                    CreateNewTransfer(transfer);
+                    console.Success(transfer.Amount);
+                } 
+                //invoke logic from TransferController.
+
                 // Send TE bucks
             }
 
@@ -170,6 +184,30 @@ namespace TenmoClient
             {
                 decimal balance = tenmoApiService.GetBalance();
                 console.PrintBalance(balance);
+            }
+            catch (Exception ex)
+            {
+                console.PrintError(ex.Message);
+            }
+            console.Pause();
+        }
+        public void TestingForValidUserId(int userInput)
+        {
+            try
+            {
+                tenmoApiService.CheckForValidUserById(userInput);
+            }
+            catch (Exception ex)
+            {
+                console.PrintError(ex.Message);
+            }
+            console.Pause();
+        }
+        public void CreateNewTransfer(Transfer transfer)
+        {
+            try
+            {
+                tenmoApiService.Transfer(transfer);
             }
             catch (Exception ex)
             {

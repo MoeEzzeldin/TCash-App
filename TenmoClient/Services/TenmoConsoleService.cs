@@ -1,15 +1,18 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using TenmoClient.Methods;
 using TenmoClient.Models;
 
 namespace TenmoClient.Services
-{ 
+{
     public class TenmoConsoleService : ConsoleService
     {
         TransferMethods transferMethods = new TransferMethods();
         Transfer transfer = new Transfer();
+        User user = new User();
+        Account account = new Account();
         /************************************************************
             Print methods
         ************************************************************/
@@ -59,43 +62,113 @@ namespace TenmoClient.Services
         {
             Console.WriteLine("\nYour Current Balance is: " + balance);
         }
-        public void SendTEBucks(List<User> differentUsers)
+        //public void SendTEBucks(List<User> differentUsers, decimal currentBalance)
+        //{
+        //    bool done = false;
+        //    while (!done)
+        //    {
+        //        try
+        //        {
+        //            Console.WriteLine(); //good
+        //            string header = $"{"User Id".PadLeft(10)}{"Username".PadLeft(10)}\n";
+        //            Console.WriteLine(header);
+        //            foreach (User user in differentUsers)
+        //            {
+        //                Console.WriteLine(user);
+        //            }
+        //            Pause();
+        //            Console.WriteLine();
+        //            Console.Write("Select the User ID of the individual you would like to send money to: ");
+        //            string userIdSelectionString = Console.ReadLine();
+        //            int userIdSelection = int.Parse(userIdSelectionString);
+        //            bool test = transferMethods.CheckForValidUserId(userIdSelection, differentUsers);
+        //            Console.WriteLine();
+        //            if (test)
+        //            {
+        //                Console.Write("Enter the amount of TEBucks you would like to send: ");
+        //                int transferAmount = int.Parse(Console.ReadLine());
+
+        //                //if (transferMethods.DoIHaveEnoughBalanceToTransfer(currentBalance, transferAmount))
+        //                //{
+
+        //                //    Console.WriteLine($"Success! You just sent " + transferAmount + " TE Bucks!");
+        //                //    Console.WriteLine();
+        //                //    Pause();
+        //                //    break;
+        //                //}
+        //            }
+        //            else
+        //            {
+        //                Console.WriteLine("Invalid User ID. Please try again");
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            PrintError(ex.Message);
+        //        }
+        //        Pause();
+        //        Console.WriteLine();
+        //    }
+        //}
+
+        public int GetsUserIdToSendMoneyTo(List<User> differentUsers)
         {
+            int userIdSelection = 0;
             bool done = false;
             while (!done)
             {
-                string header = $"{"User Id".PadLeft(10)}{"Username".PadLeft(10)}\n";
-                Console.WriteLine(header);
-                foreach (User user in differentUsers)
+                try
                 {
-                    Console.WriteLine(user);
-                }
-                Pause();
-                Console.WriteLine();
-                Console.WriteLine("Select the User ID of the individual you would like to send money to.");
-                string userIdSelectionString = Console.ReadLine();
-                if (!userIdSelectionString.IsNullOrEmpty())
-                {
-                    int userIdSelection = int.Parse(userIdSelectionString);
-                    bool test = transferMethods.CheckForValidUserId(userIdSelection, differentUsers);
+                    string header = $"{"User Id".PadLeft(10)}{"Username".PadLeft(10)}\n";
+                    Console.WriteLine(header);
+                    foreach (User user in differentUsers)
+                    {
+                        Console.WriteLine(user);
+                    }
+                    //Pause();
                     Console.WriteLine();
-                    if (test)
-                    {
-                        Console.WriteLine("Enter the amount of TEBucks you would like to send.");
-                        transfer.Amount = int.Parse(Console.ReadLine());
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid User ID. Please try again");
-                    }
+                    Console.Write("Select the User ID of the individual you would like to send money to: ");
+                    string userIdSelectionString = Console.ReadLine();
+                    userIdSelection = int.Parse(userIdSelectionString);
+                    Pause();
+                    Console.WriteLine();
+                    break;
                 }
-                else
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Please Enter a Valid Username.");
+                    PrintError(ex.Message);
                 }
-                Pause();
-                Console.WriteLine();
             }
+            return userIdSelection;
+        }
+        public decimal PromptingUserForAmountToSend()
+        {
+            Transfer transfer = new Transfer();
+            //int userInput = 0;
+            bool done = false;
+            while (!done)
+            {
+                try
+                {
+                    Console.Write("Enter the amount of TE Bucks you would like to send: ");
+                    //userInput = int.Parse(Console.ReadLine());
+                    transfer.Amount = decimal.Parse(Console.ReadLine());
+                    Console.WriteLine();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    PrintError(ex.Message);
+                }
+ 
+            }
+            return transfer.Amount;
+        }
+        public void Success(decimal amountSent)
+        {
+            Console.WriteLine();
+            Console.WriteLine("testing");
+            //Console.WriteLine($"You've successfully send {amountSent.ToString("C")} TE Bucks." );
         }
         // Add application-specific UI methods here...
     }

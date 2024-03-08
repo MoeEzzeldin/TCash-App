@@ -10,29 +10,34 @@ namespace TenmoClient.Methods
 {
     public class TransferMethods
     {
-        public bool CheckForValidUserId(int userInput, List<User> list)
-        {
-            bool result = false;
-            foreach (User user in list)
-            {
-                if (user.UserId == userInput)
-                {
-                    result = true;
-                    break;
-                }
-            }
-            return result;
-        }
-        public bool DoIHaveEnoughBalanceToTransfer(decimal fromBalance, decimal amountToTransfer)
-        {
-            bool result = false;
-            if (fromBalance - amountToTransfer >= 0)
-            {
+        //public bool CheckForValidUserId(int userInput, List<User> list)
+        //{
+        //    bool result = false;
+        //    foreach (User user in list)
+        //    {
+        //        if (user.UserId == userInput)
+        //        {
+        //            result = true;
+        //            break;
+        //        }
+        //    }
+        //    return result;
+        //}
+        //public bool DoIHaveEnoughBalanceToTransfer(decimal fromBalance, decimal amountToTransfer)
+        //{
+        //    bool result = false;
+        //    if (fromBalance - amountToTransfer >= 0)
+        //    {
                
-                result = true;
-            }
-            return result;
-        }
+        //        result = true;
+        //    }
+        //    return result;
+        //}
+        //public void TransferFunds(decimal fromBalance, decimal toBalance, decimal amountToTransfer)
+        //{
+        //    fromBalance = fromBalance - amountToTransfer;
+        //    toBalance = toBalance + amountToTransfer;
+        //}
         //public decimal TransferFundsFromAccount(decimal fromBalance, decimal amountToTransfer)
         //{
         //    fromBalance = fromBalance - amountToTransfer;
