@@ -171,5 +171,13 @@ namespace TenmoClient.Services
             //Console.WriteLine($"You've successfully send {amountSent.ToString("C")} TE Bucks." );
         }
         // Add application-specific UI methods here...
+<<<<<<< HEAD
+        public void PrintBalance()
+        {
+            Console.WriteLine();
+        }
+
+=======
+>>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
     }
 }

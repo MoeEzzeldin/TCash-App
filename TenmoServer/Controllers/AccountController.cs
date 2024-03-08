@@ -3,7 +3,6 @@ using TenmoServer.DAO;
 using TenmoServer.Exceptions;
 using TenmoServer.Models;
 using TenmoServer.Security;
-
 namespace TenmoServer.Controllers
 {
     [Route("[controller]")]
@@ -19,10 +18,12 @@ namespace TenmoServer.Controllers
             this.userDao = userDao;
         }
 
+
         [HttpGet]
         public ActionResult<decimal> GetBalance()
         {
             User currentUser = userDao.GetUserByUsername(User.Identity.Name);
+
             if (currentUser == null)
             {
                 return NotFound();

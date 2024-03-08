@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Security.Principal;
@@ -6,14 +6,12 @@ using TenmoServer.Exceptions;
 using TenmoServer.Models;
 using TenmoServer.Security;
 using TenmoServer.Security.Models;
-
 namespace TenmoServer.DAO
 {
     public class BalanceSqlDao : IBalanceDao
     {
         private readonly string connectionString;
         //const decimal StartingBalance = 1000M;
-
         public BalanceSqlDao(string dbConnectionString)
         {
             connectionString = dbConnectionString;
@@ -22,17 +20,14 @@ namespace TenmoServer.DAO
         {
             Account account = new Account();
             string sql = "SELECT balance FROM account WHERE user_id = @user_id;";
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@user_id", userId);
                     SqlDataReader reader = cmd.ExecuteReader();
-
                     if (reader.Read())
                     {
                         account.Balance = MapRowToUser(reader);
@@ -43,9 +38,10 @@ namespace TenmoServer.DAO
             {
                 throw new DaoException("SQL exception occurred", ex);
             }
-
             return account.Balance;
         }
+<<<<<<< HEAD
+=======
         public decimal UpdateFromBalance(decimal amountToDesposit, int fromUserId)
         {
             Account account = new Account();
@@ -102,6 +98,7 @@ namespace TenmoServer.DAO
 
             return account.Balance;
         }
+>>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
         private decimal MapRowToUser(SqlDataReader reader)
         {
             Account account = new Account();

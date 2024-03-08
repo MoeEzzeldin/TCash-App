@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace TenmoClient.Exceptions
     {
         public TransferAccountToException() : base() { }
         public TransferAccountToException(string message) : base(message) { }
+        public TransferAccountToException(string message, Exception inner) : base(message, inner) { }
+
     }
 }

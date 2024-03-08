@@ -20,6 +20,7 @@ namespace TenmoServer.Controllers
             this.balanceDao = balanceDao;
             this.userDao = userDao;
         }
+
         [HttpGet("/tenmo_user")]
         public ActionResult<List<User>> GetDifferentUsers()
         {
@@ -34,6 +35,7 @@ namespace TenmoServer.Controllers
             //    return NotFound();
             //}
             return Ok(list);
+
         }
         [HttpGet("/tenmo_user/{userId}")]
         public User GetUserByUserId(int userId)
