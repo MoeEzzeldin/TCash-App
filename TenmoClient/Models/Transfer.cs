@@ -12,6 +12,18 @@ namespace TenmoClient.Models
 {
     public class Transfer
     {
+<<<<<<< HEAD
+        //private int TransferId { get; set; }
+        //public int TransferTypeId { get; set; }
+        //public string TransferTypeDescription { get; set; }
+        //public int TransferStatusId { get; set; }
+        //public string TransferStatusDescription { get; set; } = "Approved";
+        //public int AccountFrom { get; set; }
+        public int AccountTo { get; set; }
+        //[Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
+
+        private decimal _amount;
+=======
         private int TransferId { get; set; }
         public int TransferTypeId { get; set; }
         public string TransferTypeDescription { get; set; }
@@ -39,21 +51,42 @@ namespace TenmoClient.Models
                 }
             } 
         }
+<<<<<<< HEAD
 
+=======
+=======
+        public int AccountTo { get; set; }
+        //[Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
+>>>>>>> 406b8cdde3f40ba55ac9798a21a877685ae4c810
+>>>>>>> dca2a08edb7ed7ebe22cef4144aab7ac33bd7d91
+>>>>>>> db10b0f8eb680cbe271b01c6a6df800c7a74a3ec
         public decimal Amount
         {
             get
             {
-                return Amount;
+                return _amount;
             }
             set
             {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+                if (value > 0M)
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> db10b0f8eb680cbe271b01c6a6df800c7a74a3ec
 
 
 
                 if (value > 0)
+<<<<<<< HEAD
+=======
+>>>>>>> 406b8cdde3f40ba55ac9798a21a877685ae4c810
+>>>>>>> dca2a08edb7ed7ebe22cef4144aab7ac33bd7d91
+>>>>>>> db10b0f8eb680cbe271b01c6a6df800c7a74a3ec
                 {
-                    Amount = value;
+                    _amount = value;
                 }
                 else
                 {

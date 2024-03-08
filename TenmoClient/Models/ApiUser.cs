@@ -1,8 +1,12 @@
-﻿namespace TenmoClient.Models
+﻿using Microsoft.IdentityModel.Tokens;
+using System.Data;
+
+namespace TenmoClient.Models
 {
     /// <summary>
     /// Return value from login endpoint
     /// </summary>
+    /// 
     public class ApiUser
     {
         public int UserId { get; set; }
