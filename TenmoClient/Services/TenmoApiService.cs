@@ -26,14 +26,7 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
-        //*********ADDED*********************************
-=======
-        //****************ADDED*********************************
->>>>>>> 406b8cdde3f40ba55ac9798a21a877685ae4c810
         public Transfer UpdateBalances(Transfer transfer)
         {
             RestRequest request = new RestRequest("/transfer");
@@ -41,6 +34,5 @@ namespace TenmoClient.Services
             IRestResponse<Transfer> response = client.Put<Transfer>(request);
             return response.Data;
         }
->>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
     }
 }

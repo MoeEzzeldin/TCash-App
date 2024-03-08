@@ -16,15 +16,10 @@ namespace TenmoClient.Models
         public int TransferTypeId { get; set; }
         public string TransferTypeDescription { get; set; }
         public int TransferStatusId { get; set; }
-<<<<<<< HEAD
 
-
-        public string TransferStatusDescription { get; set; }
-=======
         public string TransferStatusDescription { get; set; } = "Approved";
->>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
+
         public int AccountFrom { get; set; }
-<<<<<<< HEAD
         public int AccountTo
         {
             get
@@ -44,10 +39,7 @@ namespace TenmoClient.Models
                 }
             } 
         }
-=======
-        public int AccountTo { get; set; }
-        //[Range(0.01, Double.PositiveInfinity, ErrorMessage = "Price must be greater than 0.")]
->>>>>>> 406b8cdde3f40ba55ac9798a21a877685ae4c810
+
         public decimal Amount
         {
             get
@@ -56,16 +48,10 @@ namespace TenmoClient.Models
             }
             set
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-                if (Amount != 0)
-=======
-                if (Amount > 0)
->>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
-=======
+
+
                 if (value > 0)
->>>>>>> 406b8cdde3f40ba55ac9798a21a877685ae4c810
                 {
                     Amount = value;
                 }

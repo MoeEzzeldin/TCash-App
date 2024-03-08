@@ -28,11 +28,12 @@ namespace TenmoClient.Methods
             bool result = false;
             if (fromBalance - amountToTransfer >= 0)
             {
-               
+
                 result = true;
             }
             return result;
         }
+
         //public decimal TransferFundsFromAccount(decimal fromBalance, decimal amountToTransfer)
         //{
         //    fromBalance = fromBalance - amountToTransfer;

@@ -5,7 +5,7 @@ using TenmoClient.Methods;
 using TenmoClient.Models;
 
 namespace TenmoClient.Services
-{ 
+{
     public class TenmoConsoleService : ConsoleService
     {
         TransferMethods transferMethods = new TransferMethods();
@@ -98,13 +98,6 @@ namespace TenmoClient.Services
             }
         }
         // Add application-specific UI methods here...
-<<<<<<< HEAD
-        public void PrintBalance()
-        {
-            Console.WriteLine();
-        }
 
-=======
->>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
     }
 }
