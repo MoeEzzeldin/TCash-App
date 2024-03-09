@@ -40,6 +40,10 @@ namespace TenmoServer.DAO
             }
             return account.Balance;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2a0a391cde59029b6bbdb6a9b3f4667df6c3b566
         public decimal UpdateFromBalance(decimal amountToDesposit, int fromUserId)
         {
             Account account = new Account();

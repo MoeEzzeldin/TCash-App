@@ -118,6 +118,7 @@ namespace TenmoClient.Services
             Console.WriteLine($"You've successfully send {amountSent.ToString("C")} TE Bucks." );
             Pause();
         }
+<<<<<<< HEAD
         public void PrintTransactionDetails(List<TransferHistoryDTO> listOfTransactions)
         {
             bool done = false;
@@ -146,5 +147,9 @@ namespace TenmoClient.Services
             }
         }
         // Add application-specific UI methods here...
+=======
+        // Add application-specific UI methods here...
+
+>>>>>>> 2a0a391cde59029b6bbdb6a9b3f4667df6c3b566
     }
 }
