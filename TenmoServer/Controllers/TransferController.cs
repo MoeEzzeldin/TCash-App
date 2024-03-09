@@ -34,8 +34,7 @@ namespace TenmoServer.Controllers
                 return NotFound();
             }
             else
-            {
-                //transferDao.CreateNewTransfer(transfer); with Transfer object argument in controller.
+            { 
                 IList<User> differentUsers = new List<User>();
                 differentUsers = userDao.GetDifferentUsers(currentUser.Username);
                 foreach (User user in differentUsers) //we shouldn't need the conditionals anymore for making sure userId matches. that's handled elsewhere.
@@ -52,13 +51,18 @@ namespace TenmoServer.Controllers
                         }
                         else
                         {
-                            return Content("Insufficient funds.");
+                            return BadRequest();
                         }
                     }
                 }
                 return NotFound();
             }
-
+        }
+ 
+        [HttpGet("/transfer_history")]
+        public ActionResult<List<TransferHistoryDTO>> GetTransferHistory()
+        {
+            return transferDao.UserTransferHistory();
         }
     }
 }

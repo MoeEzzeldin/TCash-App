@@ -5,6 +5,7 @@ using TenmoServer.Models;
 using TenmoServer.Security.Models;
 using System.Security.Cryptography.Xml;
 using System.IO;
+using System.Collections.Generic;
 
 namespace TenmoServer.DAO
 {
@@ -16,34 +17,7 @@ namespace TenmoServer.DAO
         {
             connectionString = dbConnectionString;
         }
-        //public Transfer CreateNewTransfer(Transfer transfer)
-        //{
-        //    int newTransferId;
-        //    string sql = "INSERT INTO transfer (transfer_type_id, transfer_status_id, account_from, account_to, amount ) " +
-        //                 "OUTPUT INSERTED.transfer_id " +
-        //                 "VALUES (2, 2, (SELECT account_id FROM account WHERE user_id = @from_user_id), (SELECT account_id FROM account WHERE user_id = @to_user_id), @amount)";
 
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(connectionString))
-        //        {
-        //            conn.Open();
-
-        //            SqlCommand cmd = new SqlCommand(sql, conn);
-        //            cmd.Parameters.AddWithValue("@from_user_id", transfer.AccountTo);
-        //            cmd.Parameters.AddWithValue("@from_user_id", transfer.AccountFrom);
-        //            cmd.Parameters.AddWithValue("@amount", transfer.Amount);
-
-        //            newTransferId = Convert.ToInt32(cmd.ExecuteScalar());
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw new DaoException("SQL exception occurred", ex);
-        //    }
-
-        //    return GetTransferById(newTransferId);
-        //}
         public Transfer CreateNewTransfer(int accountTo, int accountFrom, decimal amount)
         {
             int newTransferId;
@@ -98,6 +72,73 @@ namespace TenmoServer.DAO
             }
 
             return newTransfer;
+        }
+        //public List<TransferHistoryDTO> UserTransferHistory(int userId)
+        //{
+        //    TransferHistoryDTO myObj = new TransferHistoryDTO();
+        //    List<TransferHistoryDTO> transferHistory = new List<TransferHistoryDTO>();
+        //    string sql = @"SELECT transfer_id, account_from, account_to, amount FROM transfer";
+        //    try
+        //    {
+        //        using (SqlConnection conn = new SqlConnection(connectionString))
+        //        {
+        //            conn.Open();
+        //            SqlCommand cmd = new SqlCommand(sql, conn);
+        //            //cmd.Parameters.AddWithValue("@user_id", userId);
+        //            SqlDataReader reader = cmd.ExecuteReader();
+        //            while (reader.Read())
+        //            {
+        //                myObj = TransferHistoryMapping(reader);
+        //                transferHistory.Add(myObj);
+        //            }
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        throw new DaoException("SQL exception occurred", ex);
+        //    }
+        //    return transferHistory;
+        //}
+        public List<TransferHistoryDTO> UserTransferHistory()
+        {
+            TransferHistoryDTO myObj = new TransferHistoryDTO();
+            List<TransferHistoryDTO> transferHistory = new List<TransferHistoryDTO>();
+            string sql = @"SELECT t.transfer_id, u_from.username AS from_username, u_to.username AS to_username, t.amount FROM transfer t
+            JOIN account a_from ON t.account_from = a_from.account_id
+            JOIN account a_to ON t.account_to = a_to.account_id
+            JOIN tenmo_user u_from ON a_from.user_id = u_from.user_id
+            JOIN tenmo_user u_to ON a_to.user_id = u_to.user_id;";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        myObj = TransferHistoryMapping(reader);
+                        transferHistory.Add(myObj);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw new DaoException("SQL exception occurred", ex);
+            }
+            return transferHistory;
+        }
+
+        private TransferHistoryDTO TransferHistoryMapping(SqlDataReader reader)
+        {
+            TransferHistoryDTO transfer = new TransferHistoryDTO();
+            transfer.TransferId = Convert.ToInt32(reader["transfer_id"]);
+            transfer.AccountFromUsername = Convert.ToString(reader["from_username"]);
+            transfer.AccountToUsername = Convert.ToString(reader["to_username"]);
+            transfer.Amount = Convert.ToDecimal(reader["amount"]);
+
+            return transfer;
         }
         private Transfer MapRowToTransfer(SqlDataReader reader)
         {

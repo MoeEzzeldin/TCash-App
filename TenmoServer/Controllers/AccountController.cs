@@ -18,7 +18,6 @@ namespace TenmoServer.Controllers
             this.userDao = userDao;
         }
 
-
         [HttpGet]
         public ActionResult<decimal> GetBalance()
         {

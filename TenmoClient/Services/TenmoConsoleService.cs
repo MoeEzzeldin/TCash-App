@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using TenmoClient.Methods;
 using TenmoClient.Models;
+using TenmoServer.Exceptions;
 
 namespace TenmoClient.Services
 {
     public class TenmoConsoleService : ConsoleService
     {
-        TransferMethods transferMethods = new TransferMethods();
         Transfer transfer = new Transfer();
         User user = new User();
         Account account = new Account();
@@ -62,55 +61,6 @@ namespace TenmoClient.Services
         {
             Console.WriteLine("\nYour Current Balance is: " + balance);
         }
-        //public void SendTEBucks(List<User> differentUsers, decimal currentBalance)
-        //{
-        //    bool done = false;
-        //    while (!done)
-        //    {
-        //        try
-        //        {
-        //            Console.WriteLine(); //good
-        //            string header = $"{"User Id".PadLeft(10)}{"Username".PadLeft(10)}\n";
-        //            Console.WriteLine(header);
-        //            foreach (User user in differentUsers)
-        //            {
-        //                Console.WriteLine(user);
-        //            }
-        //            Pause();
-        //            Console.WriteLine();
-        //            Console.Write("Select the User ID of the individual you would like to send money to: ");
-        //            string userIdSelectionString = Console.ReadLine();
-        //            int userIdSelection = int.Parse(userIdSelectionString);
-        //            bool test = transferMethods.CheckForValidUserId(userIdSelection, differentUsers);
-        //            Console.WriteLine();
-        //            if (test)
-        //            {
-        //                Console.Write("Enter the amount of TEBucks you would like to send: ");
-        //                int transferAmount = int.Parse(Console.ReadLine());
-
-        //                //if (transferMethods.DoIHaveEnoughBalanceToTransfer(currentBalance, transferAmount))
-        //                //{
-
-        //                //    Console.WriteLine($"Success! You just sent " + transferAmount + " TE Bucks!");
-        //                //    Console.WriteLine();
-        //                //    Pause();
-        //                //    break;
-        //                //}
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine("Invalid User ID. Please try again");
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            PrintError(ex.Message);
-        //        }
-        //        Pause();
-        //        Console.WriteLine();
-        //    }
-        //}
-
         public int GetsUserIdToSendMoneyTo(List<User> differentUsers)
         {
             int userIdSelection = 0;
@@ -125,7 +75,6 @@ namespace TenmoClient.Services
                     {
                         Console.WriteLine(user);
                     }
-                    //Pause();
                     Console.WriteLine();
                     Console.Write("Select the User ID of the individual you would like to send money to: ");
                     string userIdSelectionString = Console.ReadLine();
@@ -160,24 +109,42 @@ namespace TenmoClient.Services
                 {
                     PrintError(ex.Message);
                 }
- 
             }
             return transfer.Amount;
         }
         public void Success(decimal amountSent)
         {
             Console.WriteLine();
-            Console.WriteLine("testing");
-            //Console.WriteLine($"You've successfully send {amountSent.ToString("C")} TE Bucks." );
+            Console.WriteLine($"You've successfully send {amountSent.ToString("C")} TE Bucks." );
+            Pause();
+        }
+        public void PrintTransactionDetails(List<TransferHistoryDTO> listOfTransactions)
+        {
+            bool done = false;
+            while (!done)
+            {
+                try
+                {
+                    Console.WriteLine("Select a user for more details.");
+                    string header = $"  {"User Id".PadRight(10)}{"From".PadRight(12)}{"To".PadRight(8)}{"Amount".PadRight(8)}\n";
+                    Console.WriteLine(header);
+                    int counter = 1;
+                    foreach (TransferHistoryDTO temp in listOfTransactions)
+                    {
+                        //Console.WriteLine(temp);
+                        Console.WriteLine($"{counter}: {temp}");
+                        counter++;
+                    }
+
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    PrintError(ex.Message);
+                }
+                Console.WriteLine();
+            }
         }
         // Add application-specific UI methods here...
-<<<<<<< HEAD
-        public void PrintBalance()
-        {
-            Console.WriteLine();
-        }
-
-=======
->>>>>>> cdf271372f87d1ad07f59f8a02744bd9148116b9
     }
 }

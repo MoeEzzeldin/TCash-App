@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using TenmoClient.Methods;
 using TenmoClient.Models;
 using TenmoClient.Services;
 
@@ -14,7 +14,6 @@ namespace TenmoClient
     {
         private readonly TenmoConsoleService console = new TenmoConsoleService();
         private readonly TenmoApiService tenmoApiService;
-        private readonly TransferMethods transferMethods = new TransferMethods();
         //private readonly AuthenticatedApiService authenticatedApiService = new AuthenticatedApiService();
 
         public TenmoApp(string apiUrl)
@@ -97,24 +96,27 @@ namespace TenmoClient
 
             if (menuSelection == 4)
             {
+                //Send TE Bucks
+           
                 int userInput = console.GetsUserIdToSendMoneyTo(tenmoApiService.GetDifferentUsers()); //Step 1: Testing for valid userId
-                TestingForValidUserId(userInput); //Step 1: Testing for valid userId.
+                //TestingForValidUserId(userInput); //Step 1: Testing for valid userId.
                 decimal userToAmount = console.PromptingUserForAmountToSend(); //Step 2: No logic for <=0 needed because of setter condition. 
                 {
                     Transfer transfer = new Transfer();
                     transfer.AccountTo = userInput;
                     transfer.Amount = userToAmount;
-                    CreateNewTransfer(transfer);
-                    console.Success(transfer.Amount);
+                    if (CreateNewTransfer(transfer) == true)
+                    {
+                        console.Success(transfer.Amount);
+                    }
+                    console.Pause();
                 } 
-                //invoke logic from TransferController.
-
-                // Send TE bucks
             }
 
             if (menuSelection == 5)
             {
                 // Request TE bucks
+                DisplayTransactions();
             }
 
             if (menuSelection == 6)
@@ -193,23 +195,28 @@ namespace TenmoClient
             }
             console.Pause();
         }
-        public void TestingForValidUserId(int userInput)
+        public bool CreateNewTransfer(Transfer transfer)
         {
-            try
-            {
-                tenmoApiService.CheckForValidUserById(userInput);
-            }
-            catch (Exception ex)
-            {
-                console.PrintError(ex.Message);
-            }
-            console.Pause();
-        }
-        public void CreateNewTransfer(Transfer transfer)
-        {
+            bool result = false;
             try
             {
                 tenmoApiService.Transfer(transfer);
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                console.PrintError(ex.Message);
+                result = false;
+            }
+            return result;
+            //console.Pause();
+        }
+        public void DisplayTransactions()
+        {
+            try
+            {
+                List<TransferHistoryDTO> listOfTransactions = tenmoApiService.GetTransactions();
+                console.PrintTransactionDetails(listOfTransactions);
             }
             catch (Exception ex)
             {
@@ -217,5 +224,6 @@ namespace TenmoClient
             }
             console.Pause();
         }
+        //private bool 
     }
 }
