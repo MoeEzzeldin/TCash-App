@@ -118,7 +118,6 @@ namespace TenmoClient.Services
             Console.WriteLine($"You've successfully send {amountSent.ToString("C")} TE Bucks." );
             Pause();
         }
-<<<<<<< HEAD
         public void PrintTransactionDetails(List<TransferHistoryDTO> listOfTransactions)
         {
             bool done = false;
@@ -133,11 +132,17 @@ namespace TenmoClient.Services
                     foreach (TransferHistoryDTO temp in listOfTransactions)
                     {
                         //Console.WriteLine(temp);
-                        Console.WriteLine($"{counter}: {temp}");
+                        if(counter <= 9)
+                        {
+                            Console.WriteLine($"{counter}:  {temp}");
+                        }
+                        else if (counter > 9)
+                        {
+                            Console.WriteLine($"{counter}: {temp}");
+                        }
                         counter++;
                     }
-
-                    break;
+                    break; //breaks boolean loop
                 }
                 catch (Exception ex)
                 {
@@ -146,10 +151,5 @@ namespace TenmoClient.Services
                 Console.WriteLine();
             }
         }
-        // Add application-specific UI methods here...
-=======
-        // Add application-specific UI methods here...
-
->>>>>>> 2a0a391cde59029b6bbdb6a9b3f4667df6c3b566
     }
 }

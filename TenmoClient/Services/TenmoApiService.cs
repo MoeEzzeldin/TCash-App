@@ -26,30 +26,7 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
-<<<<<<< HEAD
         public Transfer Transfer(Transfer transfer)
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-       
-        public User CheckForValidUserById(int id)
-        {
-            RestRequest request = new RestRequest("/tenmo_user/" + id); //this end point may not work!
-            IRestResponse<User> response = client.Get<User>(request);
-            CheckForError(response);
-            return response.Data;
-        }
-
-        public Transfer Transfer(Transfer transfer)
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> db10b0f8eb680cbe271b01c6a6df800c7a74a3ec
-
-        public Transfer UpdateBalances(Transfer transfer)
->>>>>>> dca2a08edb7ed7ebe22cef4144aab7ac33bd7d91
->>>>>>> 2a0a391cde59029b6bbdb6a9b3f4667df6c3b566
         {
             RestRequest request = new RestRequest("/transfer");
             request.AddJsonBody(transfer);
@@ -57,7 +34,7 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
-<<<<<<< HEAD
+
         public List<TransferHistoryDTO> GetTransactions() //just added the "I" in front of list.
         {
             RestRequest request = new RestRequest("/transfer_history");
@@ -65,7 +42,5 @@ namespace TenmoClient.Services
             CheckForError(response);
             return response.Data;
         }
-=======
->>>>>>> 2a0a391cde59029b6bbdb6a9b3f4667df6c3b566
     }
 }

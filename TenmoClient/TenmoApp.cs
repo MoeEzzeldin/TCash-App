@@ -87,6 +87,7 @@ namespace TenmoClient
             if (menuSelection == 2)
             {
                 // View your past transfers
+                DisplayTransactions();
             }
 
             if (menuSelection == 3)
@@ -116,7 +117,7 @@ namespace TenmoClient
             if (menuSelection == 5)
             {
                 // Request TE bucks
-                DisplayTransactions();
+                //DisplayTransactions();
             }
 
             if (menuSelection == 6)
