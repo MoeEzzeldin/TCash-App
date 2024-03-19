@@ -99,7 +99,7 @@ namespace TenmoServer.DAO
         //    }
         //    return transferHistory;
         //}
-        public List<TransferHistoryDTO> UserTransferHistory()
+        public List<TransferHistoryDTO> UserTransferHistory(string me)
         {
             TransferHistoryDTO myObj = new TransferHistoryDTO();
             List<TransferHistoryDTO> transferHistory = new List<TransferHistoryDTO>();
@@ -107,7 +107,8 @@ namespace TenmoServer.DAO
             JOIN account a_from ON t.account_from = a_from.account_id
             JOIN account a_to ON t.account_to = a_to.account_id
             JOIN tenmo_user u_from ON a_from.user_id = u_from.user_id
-            JOIN tenmo_user u_to ON a_to.user_id = u_to.user_id;";
+            JOIN tenmo_user u_to ON a_to.user_id = u_to.user_id
+            WHERE u_from.username = @me OR u_to.username = @me;";
 
             try
             {
@@ -115,6 +116,7 @@ namespace TenmoServer.DAO
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@me", me);
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {

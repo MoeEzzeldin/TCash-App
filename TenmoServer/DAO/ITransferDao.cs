@@ -8,7 +8,7 @@ namespace TenmoServer.DAO
         //public Transfer CreateNewTransfer(Transfer transfer);
         public Transfer CreateNewTransfer(int accountTo, int accountFrom, decimal amount);
         public Transfer GetTransferById(int transferId);
-        public List<TransferHistoryDTO> UserTransferHistory();
+        public List<TransferHistoryDTO> UserTransferHistory(string me);
 
     }
 }

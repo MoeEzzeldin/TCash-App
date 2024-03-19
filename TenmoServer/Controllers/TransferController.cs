@@ -62,7 +62,9 @@ namespace TenmoServer.Controllers
         [HttpGet("/transfer_history")]
         public ActionResult<List<TransferHistoryDTO>> GetTransferHistory()
         {
-            return transferDao.UserTransferHistory();
+            User currentUser = userDao.GetUserByUsername(User.Identity.Name);
+            string username = currentUser.Username;
+            return transferDao.UserTransferHistory(username);
         }
     }
 }
