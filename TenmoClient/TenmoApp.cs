@@ -117,7 +117,7 @@ namespace TenmoClient
             if (menuSelection == 5)
             {
                 // Request TE bucks
-                //DisplayTransactions();
+                
             }
 
             if (menuSelection == 6)
@@ -225,6 +225,5 @@ namespace TenmoClient
             }
             console.Pause();
         }
-        //private bool 
     }
 }

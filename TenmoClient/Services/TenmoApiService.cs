@@ -35,7 +35,7 @@ namespace TenmoClient.Services
             return response.Data;
         }
 
-        public List<TransferHistoryDTO> GetTransactions() //just added the "I" in front of list.
+        public List<TransferHistoryDTO> GetTransactions() 
         {
             RestRequest request = new RestRequest("/transfer_history");
             IRestResponse<List<TransferHistoryDTO>> response = client.Get<List<TransferHistoryDTO>>(request);

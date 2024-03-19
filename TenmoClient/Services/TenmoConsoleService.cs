@@ -131,7 +131,6 @@ namespace TenmoClient.Services
                     int counter = 1;
                     foreach (TransferHistoryDTO temp in listOfTransactions)
                     {
-                        //Console.WriteLine(temp);
                         if(counter <= 9)
                         {
                             Console.WriteLine($"{counter}:  {temp}");
