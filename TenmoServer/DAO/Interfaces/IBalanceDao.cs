@@ -2,14 +2,14 @@
 using TenmoServer.Models;
 
 
-namespace TenmoServer.DAO
+namespace TenmoServer.DAO.Interfaces
 {
     public interface IBalanceDao
     {
         //decimal GetBalanceByAccountId(int accountId);
         decimal GetBalanceByUserId(int userId);
 
-        public decimal UpdateFromBalance(decimal amountToDesposit,int fromUserId);
+        public decimal UpdateFromBalance(decimal amountToDesposit, int fromUserId);
 
         public decimal UpdateToBalance(decimal amountToDesposit, int toUserId);
     }

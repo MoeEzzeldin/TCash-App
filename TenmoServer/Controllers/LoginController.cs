@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TenmoServer.DAO;
+using TenmoServer.DAO.Interfaces;
 using TenmoServer.Exceptions;
 using TenmoServer.Models;
 using TenmoServer.Security;
 
 namespace TenmoServer.Controllers
 {
-    
+
     [ApiController]
     public class LoginController : ControllerBase
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TenmoServer.Models;
 
-namespace TenmoServer.DAO
+namespace TenmoServer.DAO.Interfaces
 {
     public interface ITransferDao
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Security.Principal;
+using TenmoServer.DAO.Interfaces;
 using TenmoServer.Exceptions;
 using TenmoServer.Models;
 using TenmoServer.Security;

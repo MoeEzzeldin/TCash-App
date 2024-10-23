@@ -6,6 +6,7 @@ using TenmoServer.Security.Models;
 using System.Security.Cryptography.Xml;
 using System.IO;
 using System.Collections.Generic;
+using TenmoServer.DAO.Interfaces;
 
 namespace TenmoServer.DAO
 {

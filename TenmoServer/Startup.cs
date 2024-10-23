@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using TenmoServer.DAO;
+using TenmoServer.DAO.Interfaces;
 using TenmoServer.Security;
 
 namespace TenmoServer
@@ -49,6 +50,13 @@ namespace TenmoServer
                     NameClaimType = "name"
                 };
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowVueApp",
+                    builder => builder.WithOrigins("*") // Vue app's URL
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
 
             // Dependency Injection configuration
             services.AddSingleton<ITokenGenerator>(sp => new JwtGenerator(Configuration["JwtSecret"]));
@@ -73,6 +81,7 @@ namespace TenmoServer
             app.UseAuthentication();
 
             app.UseAuthorization();
+            app.UseCors("AllowVueApp");
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TenmoServer.Models;
 
-namespace TenmoServer.DAO
+namespace TenmoServer.DAO.Interfaces
 {
     public interface IUserDao
     {
@@ -10,6 +10,6 @@ namespace TenmoServer.DAO
         User CreateUser(string username, string password);
         IList<User> GetUsers();
 
-        IList<User> GetDifferentUsers(string currentUsername); 
+        IList<User> GetDifferentUsers(string currentUsername);
     }
 }

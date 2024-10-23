@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using TenmoServer.DAO.Interfaces;
 using TenmoServer.Exceptions;
 using TenmoServer.Models;
 using TenmoServer.Security;
@@ -18,7 +19,12 @@ namespace TenmoServer.DAO
         {
             connectionString = dbConnectionString;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="DaoException"></exception>
         public User GetUserById(int userId)
         {
             User user = null;
